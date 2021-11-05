@@ -1,45 +1,52 @@
-import React from "react";
-import { StyleSheet, Text, View, FlatList, Image } from "react-native";
-import globoTickets from "./TicketsDB";
+import React from 'react';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import globoTickets from './TicketsDB';
 
-const Tickets = () => {
+const Tickets = ({navigation}) => {
+
     const ticketItem = ({item}) => {
+        
         return (
             <View style={styles.tickets}>
                 <View>
-                    <Image
+                    <Image 
                         style={styles.img}
                         source={item.image}
-                    />
+                    />    
                 </View>
                 <View>
                     <Text style={styles.tickettitle}>
                         {item.event}
-                    </Text> 
-                    <Text style={styles.ticketsshortdescription}>
+                    </Text>
+                    <Text style={styles.ticketshortdescription}>
                         {item.shortDescription}
-                    </Text> 
-                    <Text
+                    </Text>
+                    <Text 
                         style={styles.ticketdescription}
                         numberOfLines={2}
                         ellipsizeMode='tail'
                     >
                         {item.description}
                     </Text>
-                    <Text style={styles.ticketsshortdescription}>
+                    <Text style={styles.ticketshortdescription}>
                         Price: {item.price}
                     </Text>
-                    <Text style={styles.ticketbuttom}>
-                        GET TICKETS
-                    </Text>
+
+                    <TouchableOpacity
+                        onPress={() =>{
+                            navigation.navigate('Purchase', {tickId: item.eventId})
+                        }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.ticketbutton}>GET TICKETS</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
     };
-
     return(
         <View style={styles.container}>
-            <FlatList
+            <FlatList 
                 data={globoTickets}
                 renderItem={ticketItem}
                 keyExtractor={(item) => item.eventId}
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center'
     },
-    ticketsshortdescription: {
+    ticketshortdescription: {
         fontFamily: 'Ubuntu-Light',
         fontWeight: '600',
         textAlign: 'center',
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         padding: 15
     },
-    ticketbuttom: {
+    ticketbutton: {
         fontFamily: 'Ubuntu-Regular',
         fontWeight: 'bold',
         textAlign: 'center',
