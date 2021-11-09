@@ -3,10 +3,10 @@ import { Button, Text, TextInput, View, StyleSheet, Alert } from 'react-native';
 
 const Contact = ({navigation}) => {
     
-    const [formName, setFormName] = useState('Enter Name');
-    const [formEmail, setFormEmail] = useState('Enter Email');
-    const [formPhoneNumber, setFormPhoneNumber] = useState('Enter Phone Number');
-    const [formMessage, setFormMessage] = useState('Let us know whats on your mind');
+    const [formName, setFormName] = useState('');
+    const [formEmail, setFormEmail] = useState('');
+    const [formPhoneNumber, setFormPhoneNumber] = useState('');
+    const [formMessage, setFormMessage] = useState('');
 
     const submit = () => {
         if (!formName||!formEmail||!formMessage){
